@@ -1,0 +1,23 @@
+﻿@using VSC.Core.DemoDataLinks.Model
+@using VSC.Core.ViewModel
+@model DetailViewModel<Person>
+
+<h2>Contact Detail</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-bordered">
+            <tr>
+                <th>Name</th><td>@Model.DataModel.FullTitle</td>
+            </tr>
+            @foreach (var contact in @Model.DataModel.ContactData)
+            {
+                <tr>
+                    <th>@contact.ContactType.Title</th>
+                    <td>@contact.Detail</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<cross-controller-cancel-button caption="Close"></cross-controller-cancel-button>

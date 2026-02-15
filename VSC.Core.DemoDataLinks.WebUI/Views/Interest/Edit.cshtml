@@ -1,0 +1,48 @@
+﻿@using VSC.Core.DemoDataLinks.Model
+@using VSC.Core.ViewModel
+@model EditViewModel<Interest>
+@{
+    if (Model.DataModel.Key == Guid.Empty)
+    {
+        ViewData["Title"] = $"New {Model.RowTypeTitle}";
+    }
+    else
+    {
+        ViewData["Title"] = $"Edit {Model.RowTypeTitle}";
+    }
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-5">
+
+        <form asp-action="Save" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <input type="hidden" asp-for="DataModel.InterestId" />
+            <cross-controller-hidden-inputs></cross-controller-hidden-inputs>
+            <div class="mb-3">
+                <label asp-for="DataModel.Title" class="form-label"></label>
+                <input asp-for="DataModel.Title" class="form-control" />
+                <span asp-validation-for="DataModel.Title" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="DataModel.Description" class="form-label"></label>
+                <textarea asp-for="DataModel.Description" rows="4" class="form-control" ></textarea>
+                <span asp-validation-for="DataModel.Description" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Save" class="btn btn-primary " />
+                <cross-controller-cancel-button></cross-controller-cancel-button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,28 @@
+﻿@using VSC.Core.DemoDataLinks.Model
+@using VSC.Core.ViewModel
+@model DetailViewModel<ContactGroup>
+@{
+    ViewData["Title"] = $"{Model.DataModel.Title} {Model.RowTypeTitle}";
+}
+
+<h2>@ViewData["Title"] <span class="text-secondary" style="font-size:smaller!important">(@Model.DataModel.People.Count)</span></h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+    </thead>
+    <tbody>
+        @foreach(var person in Model.DataModel.People.OrderBy(x=>x.LastName).ThenBy(x=>x.FirstName))
+        {
+            <tr>
+                <td>@person.FirstName</td>
+
+                <td>@person.LastName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<cross-controller-cancel-button caption="Close"></cross-controller-cancel-button>

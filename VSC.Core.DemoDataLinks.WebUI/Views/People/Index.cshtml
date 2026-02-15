@@ -1,0 +1,55 @@
+﻿@using VSC.Core.DemoDataLinks.Model
+@using VSC.Core.ViewModel
+@model IndexViewModel<Person>
+@{
+    ViewData["Title"] = Model.RowTypeTitlePlural;
+}
+
+<h2>@ViewData["Title"] <span class="text-secondary" style="font-size:smaller!important">(@Model.SessionViewModel.RowCount)</span></h2>
+
+<p></p>
+
+<div class="row mb-3">
+    <div class="col-md-9">
+        <query-grid-search></query-grid-search>
+    </div>
+    <div class="col-md-3">
+        <query-grid-filters></query-grid-filters>
+    </div>
+</div>
+
+<query-grid-empty-message></query-grid-empty-message>
+
+<hidden-if-empty count="@Model.Rows.Count()">
+    <query-grid-pager></query-grid-pager>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Contact Group</th>
+                <datamodel-add-button></datamodel-add-button>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.Rows.OrderBy(x => x.LastName).ThenBy(x=>x.FirstName))
+            {
+                <tr>
+                    <td>@row.FirstName</td>
+                    <td>@row.LastName</td>
+                    <td>@row.ContactGroup?.Title
+                        <datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons>
+                </tr>
+            }
+        </tbody>
+    </table>
+</hidden-if-empty>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ConfirmationDialogScriptPartial");
+        await Html.RenderPartialAsync("_FilterScriptsPartial");
+    }
+}

@@ -1,0 +1,56 @@
+﻿@using VSC.Core.DemoDataLinks.Model
+@using VSC.Core.ViewModel
+@model EditViewModel<Person>
+@{
+    if (Model.DataModel.Key == Guid.Empty)
+    {
+        ViewData["Title"] = $"New {Model.RowTypeTitle}";
+    }
+    else
+    {
+        ViewData["Title"] = $"Edit {Model.RowTypeTitle}";
+    }
+
+    var contactGroups = Model.GetDropDownList("ContactGroupList", true);
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-5">
+
+        <form asp-action="Save" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <input type="hidden" asp-for="DataModel.PersonId" />
+            <cross-controller-hidden-inputs></cross-controller-hidden-inputs>
+            <div class="mb-3">
+                <label asp-for="DataModel.FirstName" class="form-label"></label>
+                <input asp-for="DataModel.FirstName" class="form-control" />
+                <span asp-validation-for="DataModel.FirstName" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DataModel.LastName" class="form-label"></label>
+                <input asp-for="DataModel.LastName" class="form-control" />
+                <span asp-validation-for="DataModel.LastName" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DataModel.ContactGroupId" class="form-label"></label>
+                <select asp-for="DataModel.ContactGroupId" asp-items="contactGroups" class="form-control"></select>
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Save" class="btn btn-primary " />
+                <cross-controller-cancel-button></cross-controller-cancel-button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

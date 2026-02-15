@@ -1,0 +1,43 @@
+﻿@using VSC.Core.DemoDataLinks.Model
+@using VSC.Core.ViewModel
+@model IndexViewModel<ContactType>
+@{
+    ViewData["Title"] = Model.RowTypeTitlePlural;
+}
+
+<h2>@ViewData["Title"] <span class="text-secondary" style="font-size:smaller!important">(@Model.SessionViewModel.RowCount)</span></h2>
+
+<p></p>
+
+<query-grid-empty-message></query-grid-empty-message>
+
+<hidden-if-empty count="@Model.Rows.Count()">
+    <query-grid-pager></query-grid-pager>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Count</th>
+                <datamodel-add-button></datamodel-add-button>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.Rows.OrderBy(x => x.Title))
+            {
+                <tr>
+                    <td>@row.Title</td>
+                    <td>@row.ContactData.Count()</td>
+                    <datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons>
+                </tr>
+            }
+        </tbody>
+    </table>
+</hidden-if-empty>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ConfirmationDialogScriptPartial");
+        await Html.RenderPartialAsync("_FilterScriptsPartial");
+    }
+}

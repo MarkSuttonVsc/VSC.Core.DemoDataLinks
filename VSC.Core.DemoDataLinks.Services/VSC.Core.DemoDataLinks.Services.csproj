@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\VSC.Core\VSC.Core.Services.Interfaces\VSC.Core.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\VSC.Core.DemoDataLinks.DataModel\VSC.Core.DemoDataLinks.DataModel.csproj" />
+    <ProjectReference Include="..\VSC.Core.DemoDataLinks.Data\VSC.Core.DemoDataLinks.Data.csproj" />
+  </ItemGroup>
+
+</Project>
