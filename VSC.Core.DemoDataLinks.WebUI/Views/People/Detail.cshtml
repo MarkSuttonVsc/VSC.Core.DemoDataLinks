@@ -18,6 +18,25 @@
                 </tr>
             }
         </table>
+
+        <h3>Interests Include</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var row in Model.DataModel.PersonalInterests.OrderBy(x=>x.Interest.Title))
+            {
+                <tr>
+                    
+                    <td>@row.Interest.Title</td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
 </div>
 <cross-controller-cancel-button caption="Close"></cross-controller-cancel-button>

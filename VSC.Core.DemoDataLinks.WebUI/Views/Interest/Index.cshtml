@@ -17,8 +17,8 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Count</th>
-                <datamodel-add-button></datamodel-add-button>
+                <th>People</th>
+                <th class=""><datamodel-add-button></datamodel-add-button></th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                 <tr>
                     <td>@row.Title</td>
                     <td>@row.PersonalInterests.Count()</td>
-                    <datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons>
+                    <td><datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons></td>
                 </tr>
             }
         </tbody>

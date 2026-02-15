@@ -1,14 +1,18 @@
-﻿
-<li class="nav-item">
-    <a class="nav-link text-dark" asp-area="" asp-controller="ContactGroup" asp-action="Index">Contact Groups</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link text-dark" asp-area="" asp-controller="People" asp-action="Index">People</a>
-</li>
-@* <li><hr class="dropdown-divider"></li> *@
-<li class="nav-item">
-    <a class="nav-link text-dark" asp-area="" asp-controller="ContactType" asp-action="Index">Contact Types</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link text-dark" asp-area="" asp-controller="Interest" asp-action="Index">Interests</a>
-</li>
+﻿<signed-in-users-only>
+    <ul class="navbar-nav navbar-left">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="ContactGroup" asp-action="Index">Contact Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="People" asp-action="Index">People</a>
+        </li>
+        @* <li><hr class="dropdown-divider"></li> *@
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="ContactType" asp-action="Index">Contact Types</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Interest" asp-action="Index">Interests</a>
+        </li>
+    </ul>
+</signed-in-users-only>
+    

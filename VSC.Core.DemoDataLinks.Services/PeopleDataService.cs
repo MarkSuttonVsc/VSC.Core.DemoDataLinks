@@ -57,6 +57,7 @@ namespace VSC.Core.DemoContacts.Services
             return await _database.People
                 .Include(x => x.ContactGroup)
                 .Include(x => x.ContactData).ThenInclude(x => x.ContactType)
+                .Include(x=>x.PersonalInterests).ThenInclude(x=>x.Interest)
                 .FirstOrDefaultAsync(x => x.InstanceId == instanceId && x.PersonId == id);
         }
 
@@ -79,6 +80,7 @@ namespace VSC.Core.DemoContacts.Services
         {
             var query = filterSortQuery(_database.People
                 .Include(x=>x.ContactGroup)
+                .Include(x => x.PersonalInterests).ThenInclude(x=>x.Interest)
                 .Where(x => x.InstanceId == instanceId)
                 .OrderBy(x => x.LastName).ThenBy(x=>x.FirstName))
                 .Skip(pageSize*(pageNo-1)).Take(pageSize);

@@ -18,7 +18,7 @@
             <tr>
                 <th>Title</th>
                 <th>Count</th>
-                <datamodel-add-button></datamodel-add-button>
+                <th><datamodel-add-button></datamodel-add-button></th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                 <tr>
                     <td>@row.Title</td>
                     <td>@row.ContactData.Count()</td>
-                    <datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons>
+                    <td><datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons></td>
                 </tr>
             }
         </tbody>

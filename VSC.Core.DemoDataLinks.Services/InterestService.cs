@@ -5,7 +5,7 @@ using VSC.Core.Services.Interfaces;
 
 namespace VSC.Core.DemoContacts.Services
 {
-    public class InterestService : DemoDataServiceBase, IInstanceService<Interest>
+    public class InterestService : DemoDataServiceBase, IInstanceService<Interest>, IDetailService<Interest>
     {
         public InterestService(DemoDatabaseContext context) : base(context) { }
 
@@ -47,6 +47,13 @@ namespace VSC.Core.DemoContacts.Services
                 .FirstOrDefaultAsync(x => x.InstanceId == instanceId && x.InterestId == id);
         }
 
+        public async Task<Interest?> GetDetail(Guid instanceId, Guid id)
+        {
+            return await _database.Interests
+                .Include(x=>x.PersonalInterests).ThenInclude(x=>x.Person)
+                .FirstOrDefaultAsync(x => x.InstanceId == instanceId && x.InterestId == id);
+        }
+
         public Task<Interest?> GetQuery(Guid instanceId, Func<IQueryable<Interest>, IQueryable<Interest>> filterQuery)
         {
             throw new NotImplementedException();
@@ -79,6 +86,7 @@ namespace VSC.Core.DemoContacts.Services
                 Interest.Updated = DateTime.UtcNow;
                 Interest.LastChangeBy = update.LastChangeBy;
                 Interest.Title = update.Title;
+                Interest.Description = update.Description;
                 await _database.SaveChangesAsync();
             }
             return Interest;

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using VSC.Core.DataModel;
 using VSC.Core.DataModel.Interfaces;
 
 namespace VSC.Core.DemoDataLinks.Model;
 
-public partial class Interest : IDataModel, IRowRevisionHistory, IMultiTenantKey
+public partial class Interest : IDataModel, IDataLinkModel, IRowRevisionHistory, IMultiTenantKey
 {
     public Guid InterestId { get; set; }
 
@@ -35,10 +36,15 @@ public partial class Interest : IDataModel, IRowRevisionHistory, IMultiTenantKey
 
     public bool CanDelete => PersonalInterests.Count() == 0;
 
-    public bool HasDetail => false;
+    public bool HasDetail => true;
 
-    public bool HasLinks => false;
-    public Dictionary<string, IDataLinkDefinition>? DataLinkDefinitions => null;
+    //has ILinkDataModel
+    public bool HasLinks => true;
+    public Dictionary<string, IDataLinkDefinition>? DataLinkDefinitions =>
+        new Dictionary<string, IDataLinkDefinition>
+        {
+            { "InterestLink", new DataLinkDefinition {LinkTitle = "Interested Person", LinkControllerName = "LinkInterestPerson" } }            
+        };
 
     public bool DoNotPage => false;
 

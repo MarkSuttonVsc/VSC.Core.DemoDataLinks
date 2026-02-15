@@ -6,7 +6,7 @@ using VSC.Core.DataModel.Interfaces;
 
 namespace VSC.Core.DemoDataLinks.Model;
 
-public partial class Person : IDataModel, IRowRevisionHistory, IMultiTenantKey
+public partial class Person : IDataModel, IDataLinkModel, IRowRevisionHistory, IMultiTenantKey
 {
     public Guid PersonId { get; set; }
 
@@ -54,8 +54,13 @@ public partial class Person : IDataModel, IRowRevisionHistory, IMultiTenantKey
 
     public bool HasDetail => true;
 
-    public bool HasLinks => false;
-    public Dictionary<string, IDataLinkDefinition>? DataLinkDefinitions => null;
+    //IDataLinkModel
+    public bool HasLinks => true;
+    public Dictionary<string, IDataLinkDefinition>? DataLinkDefinitions =>
+        new Dictionary<string, IDataLinkDefinition>
+        {
+            { "InterestLink", new DataLinkDefinition { LinkTitle="Personal Interest",LinkControllerName = "LinkPersonInterest" } }
+        };
 
     public bool DoNotPage => false;
 
@@ -77,8 +82,9 @@ public partial class Person : IDataModel, IRowRevisionHistory, IMultiTenantKey
         
             { "FirstNameSearch", new DataSearchDefinition { Caption = "First Name", IsCaseSensitive=false, IsAnyPosition=false } }
         };
-
-public Guid Key => PersonId;
+    
+    public Guid Key => PersonId;
 
     public string FullTitle => $"{FirstName} {LastName}".Trim();
-}
+
+ }

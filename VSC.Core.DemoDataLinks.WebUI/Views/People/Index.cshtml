@@ -29,7 +29,8 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Contact Group</th>
-                <datamodel-add-button></datamodel-add-button>
+                <th>Interests</th>
+                <th><datamodel-add-button></datamodel-add-button></th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +40,16 @@
                     <td>@row.FirstName</td>
                     <td>@row.LastName</td>
                     <td>@row.ContactGroup?.Title
-                        <datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons>
+                    <td>@foreach(var link in row.PersonalInterests.OrderBy(x=>x.Interest.Title))
+                        {
+                            <span class="badge bg-info">
+                                @link.Interest.Title
+                                <a class="text-white text-decoration-none" asp-action="RemoveLink" asp-controller="LinkPersonInterest" asp-route-id="@link.PersonalInterestId"
+                                    asp-route-fromController="People" asp-route-fromAction="Index" > <i class="bi-x"></i></a>
+                            </span>
+                        }
+                    </td>
+                    <td><datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons></td>
                 </tr>
             }
         </tbody>

@@ -12,6 +12,8 @@
     <ProjectReference Include="..\..\..\..\..\git8\VSC.Core\VSC.Core.Services\VSC.Core.Services.csproj" />
     <ProjectReference Include="..\..\..\..\..\git8\VSC.Core\VSC.Core.WebUI\VSC.Core.WebUI.csproj" />
     <ProjectReference Include="..\..\VSC.Core\VSC.Core.Services.Interfaces\VSC.Core.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\..\VSC.Core\VSC.Core.ViewModels\VSC.Core.ViewModel.csproj" />
+    <ProjectReference Include="..\..\VSC.Core\VSC.Core.WebRCL\VSC.Core.WebRCL.csproj" />
     <ProjectReference Include="..\VSC.Core.DemoDataLinks.DataModel\VSC.Core.DemoDataLinks.DataModel.csproj" />
     <ProjectReference Include="..\VSC.Core.DemoDataLinks.Data\VSC.Core.DemoDataLinks.Data.csproj" />
     <ProjectReference Include="..\VSC.Core.DemoDataLinks.Services\VSC.Core.DemoDataLinks.Services.csproj" />

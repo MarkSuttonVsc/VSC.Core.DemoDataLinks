@@ -30,8 +30,8 @@ builder.Services.AddDbContext<SessionStateDbContext>(options => options.UseSqlSe
     .UseLoggerFactory(new NullLoggerFactory()));
 
 var demoDataConnectionString = builder.Configuration.GetConnectionString("DemoDatabaseConnection");
-builder.Services.AddDbContext<DemoDatabaseContext>(options => options.UseSqlServer(demoDataConnectionString));
-    //.UseLoggerFactory(new NullLoggerFactory()));
+builder.Services.AddDbContext<DemoDatabaseContext>(options => options.UseSqlServer(demoDataConnectionString)
+    .UseLoggerFactory(new NullLoggerFactory()));
 
 //Session Core
 builder.Services.AddTransient<ISessionStateStore, SessionStateStore>();
@@ -42,6 +42,8 @@ builder.Services.AddTransient<IInstanceService<ContactData>, ContactDataService>
 builder.Services.AddTransient<IInstanceService<ContactGroup>, ContactGroupService>();
 builder.Services.AddTransient<IInstanceService<Person>, PeopleDataService>();
 builder.Services.AddTransient<IInstanceService<Interest>, InterestService>();
+builder.Services.AddTransient<ILinkService<PersonalInterest>, PersonalInterestService>();
+
 
 //Identity
 builder.Services.AddTransient<IUserStore<UserCredential>, UserStore>();
