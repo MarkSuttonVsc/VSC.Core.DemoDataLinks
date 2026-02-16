@@ -17,8 +17,9 @@
         <thead>
             <tr>
                 <th>Title</th>
+                <th>Description</th>
                 <th>People</th>
-                <th class=""><datamodel-add-button></datamodel-add-button></th>
+                <th class="button-col-4"><datamodel-add-button></datamodel-add-button></th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
             {
                 <tr>
                     <td>@row.Title</td>
+                    <td>@row.Description</td>
                     <td>@row.PersonalInterests.Count()</td>
                     <td><datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons></td>
                 </tr>
@@ -34,10 +36,12 @@
     </table>
 </hidden-if-empty>
 
+@section Head
+{
+    <query-grid-add-styles></query-grid-add-styles>
+}
+
 @section Scripts
 {
-    @{
-        await Html.RenderPartialAsync("_ConfirmationDialogScriptPartial");
-        await Html.RenderPartialAsync("_FilterScriptsPartial");
-    }
+    <query-grid-add-scripts></query-grid-add-scripts>
 }

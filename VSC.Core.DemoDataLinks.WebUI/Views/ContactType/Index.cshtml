@@ -5,6 +5,8 @@
     ViewData["Title"] = Model.RowTypeTitlePlural;
 }
 
+
+
 <h2>@ViewData["Title"] <span class="text-secondary" style="font-size:smaller!important">(@Model.SessionViewModel.RowCount)</span></h2>
 
 <p></p>
@@ -18,7 +20,7 @@
             <tr>
                 <th>Title</th>
                 <th>Count</th>
-                <th><datamodel-add-button></datamodel-add-button></th>
+                <th class="button-col-3"><datamodel-add-button></datamodel-add-button></th>
             </tr>
         </thead>
         <tbody>
@@ -34,10 +36,14 @@
     </table>
 </hidden-if-empty>
 
+@section Head
+{
+    <link rel="stylesheet" href="_content/VSC.Core.WebRCL/css/querygrid.css" />
+}
+
 @section Scripts
 {
-    @{
-        await Html.RenderPartialAsync("_ConfirmationDialogScriptPartial");
-        await Html.RenderPartialAsync("_FilterScriptsPartial");
-    }
+    <script src="_content/VSC.Core.WebRCL/vsc.javascript/vsc.dialogs.confirm.js" asp-append-version="true"></script>
+    <script src="_content/VSC.Core.WebRCL/vsc.javascript/vsc.forms.autosubmit.js" asp-append-version="true"></script>
+    
 }
