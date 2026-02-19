@@ -54,6 +54,8 @@ namespace VSC.Core.DemoDataLinks.WebUI.Controllers
 
         private static IQueryable<Person> GetFilterSearchFunction(IQueryable<Person> query, SessionViewModel sessionViewModel)
         {
+            //this must include the OrderBy for the paging to work correctly
+
             var filter = sessionViewModel.FilterStates.FirstOrDefault(x => x.FilterName == "ContactGroupFilter" && x.CurrentItem != Guid.Empty);
             var searchFirstName = sessionViewModel.SearchStates.FirstOrDefault(x => x.SearchName == "FirstNameSearch" && !String.IsNullOrWhiteSpace(x.SearchCriterion));
             var searchLastName = sessionViewModel.SearchStates.FirstOrDefault(x => x.SearchName == "LastNameSearch" && !String.IsNullOrWhiteSpace(x.SearchCriterion));
@@ -65,24 +67,27 @@ namespace VSC.Core.DemoDataLinks.WebUI.Controllers
                 if (searchFirstName != null && searchLastName == null)
                 {
                     string firstName = searchFirstName.SearchCriterion ?? "";
-                    return query.Where(y => y.ContactGroupId == selectedValue && y.FirstName.StartsWith(firstName));
+                    return query.Where(y => y.ContactGroupId == selectedValue && y.FirstName.StartsWith(firstName))
+                        .OrderBy(s=>s.LastName).ThenBy(s=>s.FirstName);
                 }
                 if (searchFirstName == null && searchLastName != null)
                 {
                     string lastName = searchLastName.SearchCriterion ?? "";
-                    return query.Where(y => y.ContactGroupId == selectedValue && y.LastName.StartsWith(lastName));
+                    return query.Where(y => y.ContactGroupId == selectedValue && y.LastName.StartsWith(lastName))
+                        .OrderBy(s => s.LastName).ThenBy(s => s.FirstName);
                 }
                 if (searchFirstName != null && searchLastName != null)
                 {
                     string firstName = searchFirstName.SearchCriterion ?? "";
                     string lastName = searchLastName.SearchCriterion ?? "";
                     return query.Where(y => y.ContactGroupId == selectedValue
-                        && y.FirstName.StartsWith(firstName)
-                        && y.LastName.StartsWith(lastName));
+                            && y.FirstName.StartsWith(firstName)
+                            && y.LastName.StartsWith(lastName))
+                        .OrderBy(s => s.LastName).ThenBy(s => s.FirstName);
                 }
 
                 //no name search
-                return query.Where(y => y.ContactGroupId == selectedValue);
+                return query.Where(y => y.ContactGroupId == selectedValue).OrderBy(s => s.LastName).ThenBy(s => s.FirstName);
             }
             else
             {
@@ -90,22 +95,25 @@ namespace VSC.Core.DemoDataLinks.WebUI.Controllers
                 if (searchFirstName != null && searchLastName == null)
                 {
                     string firstName = searchFirstName.SearchCriterion ?? "";
-                    return query.Where(y => y.FirstName.StartsWith(firstName));
+                    return query.Where(y => y.FirstName.StartsWith(firstName))
+                        .OrderBy(s => s.LastName).ThenBy(s => s.FirstName);
                 }
                 if (searchFirstName == null && searchLastName != null)
                 {
                     string lastName = searchLastName.SearchCriterion ?? "";
-                    return query.Where(y => y.LastName.StartsWith(lastName));
+                    return query.Where(y => y.LastName.StartsWith(lastName))
+                    .OrderBy(s => s.LastName).ThenBy(s => s.FirstName);
                 }
                 if (searchFirstName != null && searchLastName != null)
                 {
                     string firstName = searchFirstName.SearchCriterion ?? "";
                     string lastName = searchLastName.SearchCriterion ?? "";
-                    return query.Where(y => y.FirstName.StartsWith(firstName) && y.LastName.StartsWith(lastName));
+                    return query.Where(y => y.FirstName.StartsWith(firstName) && y.LastName.StartsWith(lastName))
+                        .OrderBy(s => s.LastName).ThenBy(s => s.FirstName);
                 }
             }
             //no search or filter at all (all values are selected)
-            return query.Where(x => true);
+            return query.OrderBy(s => s.LastName).ThenBy(s => s.FirstName);
         }
 
 

@@ -63,8 +63,7 @@ namespace VSC.Core.DemoContacts.Services
         {
             var query = filterSortQuery(_database.ContactGroups
                 .Include(x=>x.People)
-              .Where(x => x.InstanceId == instanceId)
-              .OrderBy(x => x.Title));
+              .Where(x => x.InstanceId == instanceId));
 
             return await query.ToListAsync();
         }
@@ -73,8 +72,7 @@ namespace VSC.Core.DemoContacts.Services
         {
             var query = filterSortQuery(_database.ContactGroups
                 .Include(x => x.People)
-              .Where(x => x.InstanceId == instanceId)
-              .OrderBy(x => x.Title))
+              .Where(x => x.InstanceId == instanceId))
               .Skip(pageSize  * (pageNo - 1)).Take(pageSize);
 
             return await query.ToListAsync();
