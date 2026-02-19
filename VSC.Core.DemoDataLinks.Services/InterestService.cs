@@ -61,18 +61,18 @@ namespace VSC.Core.DemoContacts.Services
 
         public async Task<IEnumerable<Interest>> List(Guid instanceId, Func<IQueryable<Interest>, IQueryable<Interest>> filterSortQuery)
         {
-            return await _database.Interests
+            var query = filterSortQuery(_database.Interests
                 .Include(x=>x.PersonalInterests)
-              .Where(x => x.InstanceId == instanceId)
-              .OrderBy(x => x.Title).ToListAsync();
+                .Where(x => x.InstanceId == instanceId));              
+            return await query.ToListAsync();
         }
 
         public async Task<IEnumerable<Interest>> ListPagedFiltered(Guid instanceId, Func<IQueryable<Interest>, IQueryable<Interest>> filterSortQuery, int pageNo, int pageSize)
         {
             var query = filterSortQuery(_database.Interests
                 .Include(x => x.PersonalInterests)
-              .Where(x => x.InstanceId == instanceId)
-              .OrderBy(x => x.Title));
+                .Where(x => x.InstanceId == instanceId))
+                .Skip(pageSize*(pageNo-1)).Take(pageSize);
 
             return await query.ToListAsync();
         }

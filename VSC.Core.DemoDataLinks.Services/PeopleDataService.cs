@@ -61,18 +61,20 @@ namespace VSC.Core.DemoContacts.Services
                 .FirstOrDefaultAsync(x => x.InstanceId == instanceId && x.PersonId == id);
         }
 
-        public Task<Person?> GetQuery(Guid instanceId, Func<IQueryable<Person>, IQueryable<Person>> filterQuery)
+        public async Task<Person?> GetQuery(Guid instanceId, Func<IQueryable<Person>, IQueryable<Person>> filterQuery)
         {
-            throw new NotImplementedException();
+            var query = filterQuery(_database.People
+                .Include(x => x.ContactGroup)
+                .Where(x => x.InstanceId == instanceId));
+            return await query.FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Person>> List(Guid instanceId, Func<IQueryable<Person>, IQueryable<Person>> filterSortQuery)
         {
             var query = filterSortQuery(_database.People
                 .Include(x => x.ContactGroup)
-                .Where(x => x.InstanceId == instanceId)
-                .OrderBy(x => x.LastName).ThenBy(x => x.FirstName));
-
+                .Where(x => x.InstanceId == instanceId));
+                
             return await query.ToListAsync();
         }
 
@@ -81,8 +83,7 @@ namespace VSC.Core.DemoContacts.Services
             var query = filterSortQuery(_database.People
                 .Include(x=>x.ContactGroup)
                 .Include(x => x.PersonalInterests).ThenInclude(x=>x.Interest)
-                .Where(x => x.InstanceId == instanceId)
-                .OrderBy(x => x.LastName).ThenBy(x=>x.FirstName))
+                .Where(x => x.InstanceId == instanceId))
                 .Skip(pageSize*(pageNo-1)).Take(pageSize);
 
             return await query.ToListAsync();
