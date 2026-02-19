@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var row in Model.Rows.OrderBy(x => x.Title))
+            @foreach (var row in Model.Rows)
             {
                 <tr>
                     <td>@row.Title</td>

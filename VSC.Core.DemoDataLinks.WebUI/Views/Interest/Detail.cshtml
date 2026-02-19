@@ -24,7 +24,11 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Added</th>
-                    <th class="button-col-2"></th>
+                    <th class="button-col-2">
+                        <a asp-action="Link" asp-controller="LinkInterestPerson" asp-route-id="@Model.DataModel.Key"
+                           asp-route-fromController="Interest" asp-route-fromAction="Detail"
+                           asp-route-fromId="@Model.DataModel.Key"><i class="bi-link"></i></a>
+                    </th>
                 </tr>
             </thead>
         <tbody>
@@ -34,7 +38,7 @@
                     <td>@row.Person.FirstName</td>
                     <td>@row.Person.LastName</td>
                     <td>@Html.ShortDate(row.Inserted)</td>
-                    <td>
+                    <td class="button-cell">
                             <a asp-action="RemoveLink" asp-controller="LinkInterestPerson" asp-route-id="@row.PersonalInterestId"
                                asp-route-fromController="Interest" asp-route-fromAction="Detail" 
                                 asp-route-fromId="@Model.DataModel.Key"> <i class="bi-trash"></i></a>
@@ -45,6 +49,7 @@
         </table>
     </div>
 </div>
+<cross-controller-cancel-button></cross-controller-cancel-button>
 
 @section Head
 {

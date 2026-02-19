@@ -22,12 +22,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var row in Model.Rows.OrderBy(x => x.Title))
+            @foreach (var row in Model.Rows)
             {
                 <tr>
                     <td>@row.Title</td>
                     <td>@row.People.Count()</td>
-                    <td><datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons></td>
+                    <td class="button-cell"><datamodel-edit-buttons row-object="@row"></datamodel-edit-buttons></td>
                 </tr>
             }
         </tbody>

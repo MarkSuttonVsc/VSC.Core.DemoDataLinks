@@ -124,7 +124,6 @@ namespace VSC.Core.DemoDataLinks.WebUI.Controllers
 
         public override async Task<IEnumerable<Person>> GetIndexRows(SessionViewModel sessionViewModel)
         {
-         
              return await _service.ListPagedFiltered(InstanceId,
                 x => GetFilterSearchFunction(x, sessionViewModel),
                 sessionViewModel.CurrentPage ?? 1, 

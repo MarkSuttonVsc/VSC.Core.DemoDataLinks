@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VSC.Core.DemoContactLinks.WebUI.Models;
 
@@ -13,6 +14,7 @@ namespace VSC.Core.DemoContactLinks.WebUI.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
