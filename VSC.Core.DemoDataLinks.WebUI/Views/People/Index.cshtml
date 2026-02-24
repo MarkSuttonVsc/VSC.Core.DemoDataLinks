@@ -20,7 +20,7 @@
 
 <query-grid-empty-message></query-grid-empty-message>
 
-<hidden-if-empty count="@Model.Rows.Count()">
+<hide-if-empty count="@Model.Rows.Count()">
     <query-grid-pager></query-grid-pager>
 
     <table class="table">
@@ -54,7 +54,7 @@
             }
         </tbody>
     </table>
-</hidden-if-empty>
+</hide-if-empty>
 
 @section Head
 {
