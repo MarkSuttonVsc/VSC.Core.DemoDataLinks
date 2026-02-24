@@ -48,13 +48,10 @@ namespace VSC.Core.DemoDataLinks.WebUI.Controllers
                       .OrderBy(s => s.LastName).ThenBy(s => s.FirstName));
         }
 
-        /// <summary>
-        /// This is the Interest->Person (reverse) direction for the relationship
-        /// </summary>
-        /// <param name="viewModel"></param>
-        /// <returns></returns>
+      
         public override async Task<IActionResult> SaveLink(LinkViewModel viewModel)
         {
+            // This is the Interest->Person (reverse) direction for the relationship
             await SaveModelStatePreparation(viewModel); //located in IdentityController base - processes the [NoModelStateValidation] attribute.   
             if (ModelState.IsValid)
             {

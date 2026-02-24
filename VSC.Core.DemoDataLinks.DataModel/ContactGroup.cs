@@ -47,7 +47,8 @@ public partial class ContactGroup : IDataModel, IRowRevisionHistory, IMultiTenan
     public bool IsSearchExclusive => false;
     public Dictionary<string, IDataSearchDefinition>? SearchDefinitions => null;
 
-    public Guid Key => ContactGroupId;
+    [NotMapped]
+    public Guid Key { get => ContactGroupId; set => ContactGroupId = value; }
 
     
 }

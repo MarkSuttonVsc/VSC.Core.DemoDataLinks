@@ -30,7 +30,8 @@ public partial class ContactData : IDataModel, IRowRevisionHistory, IMultiTenant
 
     public virtual Person Person { get; set; } = null!;
 
-    public Guid Key => ContactTypeId;
+    [NotMapped]
+    public Guid Key {get=> ContactTypeId; set=> ContactTypeId = value; }
 
     public string RowTypeTitle => "Contact Data";
 

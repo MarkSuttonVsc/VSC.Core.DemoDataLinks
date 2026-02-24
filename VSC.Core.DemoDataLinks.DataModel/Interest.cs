@@ -57,7 +57,8 @@ public partial class Interest : IDataModel, IDataLinkModel, IRowRevisionHistory,
     public bool IsSearchExclusive => false;
     public Dictionary<string, IDataSearchDefinition>? SearchDefinitions => null;
 
-    public Guid Key => InterestId;
+    [NotMapped]
+    public Guid Key { get => InterestId; set => InterestId = value; }
 
     public string FullTitle => Title;
 }

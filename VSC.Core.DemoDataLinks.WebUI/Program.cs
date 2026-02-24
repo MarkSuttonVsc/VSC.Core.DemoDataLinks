@@ -61,7 +61,7 @@ builder.Services.Configure<IdentityOptions>(opts => {
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/SignIn";
-    options.Cookie.Name = "VSC.Core.Demo.ContactLinks";
+    options.Cookie.Name = "VSC.Core.Demo.DemoLinks";
 });
 
 // To ensure custom claims are added to new identity when the principal is refreshed.

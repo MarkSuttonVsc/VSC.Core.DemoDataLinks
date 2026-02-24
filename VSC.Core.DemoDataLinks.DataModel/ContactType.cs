@@ -49,7 +49,8 @@ public partial class ContactType : IDataModel, IRowRevisionHistory, IMultiTenant
     public bool IsSearchExclusive => false;
     public Dictionary<string, IDataSearchDefinition>? SearchDefinitions => null;
 
-    public Guid Key => ContactTypeId;
+    [NotMapped]
+    public Guid Key { get => ContactTypeId; set => ContactTypeId = value; }
 
     public string FullTitle => Title;
 }

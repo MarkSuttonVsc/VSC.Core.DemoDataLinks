@@ -83,7 +83,7 @@ public partial class Person : IDataModel, IDataLinkModel, IRowRevisionHistory, I
             { "FirstNameSearch", new DataSearchDefinition { Caption = "First Name", IsCaseSensitive=false, IsAnyPosition=false } }
         };
     
-    public Guid Key => PersonId;
+    public Guid Key { get => PersonId; set => PersonId = value; }
 
     public string FullTitle => $"{FirstName} {LastName}".Trim();
 

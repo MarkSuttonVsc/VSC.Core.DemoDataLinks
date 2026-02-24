@@ -50,7 +50,8 @@ public partial class PersonalInterest : IDataModel, IRowRevisionHistory, IMultiT
 
     public Dictionary<string, IDataSearchDefinition>? SearchDefinitions => null;
 
-    public Guid Key => PersonalInterestId;
+    [NotMapped]
+    public Guid Key { get => PersonalInterestId; set => PersonalInterestId = value; }
 
     //IFullTitle
     [NotMapped]
